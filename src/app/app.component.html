@@ -1,0 +1,65 @@
+<span>{{isConnection}}</span>
+<span>{{version}}</span>
+
+
+<button (click)="checkConnection()">Is Connected?</button>
+
+<h1>URL updated:</h1>
+<pre *ngIf="transactionUrl">
+  {{transactionUrl}}
+</pre>
+
+<h1>Accounts</h1>
+
+<input type="text" placeholder="Password"
+         required id="password"
+         [(ngModel)]="password" name="password">
+
+<ul>
+  <li *ngFor="let account of accounts">
+    <p>{{account}}</p>
+    <a (click)="getBalance(account)">Get balance</a>
+    <a (click)="unlockAccount(account)">Unlock Account</a>
+  </li>
+</ul>
+
+<h1>Balance</h1>
+
+<p>
+  <strong>Account:</strong> {{currentAccount}}
+  <strong>Balance:</strong> {{balance}}
+</p>
+
+<h1>Send transaction</h1>
+
+<form #sendTransactionForm="ngForm" (ngSubmit)="sendTransaction(sendTransactionForm)">
+
+  <label for="address">Sender</label>
+  <input type="text" placeholder="Address1"
+         required id="user-name"
+         [(ngModel)]="address1" name="address1">
+
+  <label for="address">Reciver:</label>
+  <input type="text" placeholder="Address2"
+         required id="user-name"
+         [(ngModel)]="address2" name="address2">
+
+  <button type="submit" [disabled]="!sendTransactionForm.form.valid">
+    Send transaction
+  </button>
+</form>
+
+
+<h1>Deploy Contract</h1>
+
+<button (click)="deployContract()">Deploy Contract</button>
+
+<h1>Contract Invocations</h1>
+
+<input type="text" placeholder="Set num"
+         required id="setnum"
+         [(ngModel)]="setnum" name="setnum">
+
+<button (click)="callContractSet()">Set Function From Contract</button>
+
+<button (click)="callContractGet()">Get Function From Contract</button>
